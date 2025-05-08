@@ -1,5 +1,5 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 import {
   PieChart,
   Pie,
@@ -12,31 +12,31 @@ import {
   CartesianGrid,
   Legend,
   ResponsiveContainer,
-} from 'recharts';
+} from "recharts";
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
 const samplePieData = [
-  { name: 'Sales', value: 450 },
-  { name: 'Returns', value: 120 },
-  { name: 'Orders', value: 330 },
+  { name: "Sales", value: 450 },
+  { name: "Returns", value: 120 },
+  { name: "Orders", value: 330 },
 ];
 
 const sampleLineData = [
-  { name: 'Jan', sales: 400 },
-  { name: 'Feb', sales: 300 },
-  { name: 'Mar', sales: 500 },
-  { name: 'Apr', sales: 700 },
-  { name: 'May', sales: 600 },
+  { name: "Jan", sales: 400 },
+  { name: "Feb", sales: 300 },
+  { name: "Mar", sales: 500 },
+  { name: "Apr", sales: 700 },
+  { name: "May", sales: 600 },
 ];
 
 const AdminDashboard: React.FC = () => {
-  const [startDate, setStartDate] = useState('2025-01-01');
-  const [endDate, setEndDate] = useState('2025-12-31');
+  const [startDate, setStartDate] = useState("2025-01-01");
+  const [endDate, setEndDate] = useState("2025-12-31");
 
   return (
     <div className="p-4 space-y-6">
-      <h1 className="text-center font-bold text-2xl">Admin Dashboard 2</h1>
+      {/* <h1 className="text-center font-bold text-2xl">Admin Dashboard</h1> */}
 
       {/* Date Filters */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -104,7 +104,11 @@ const AdminDashboard: React.FC = () => {
                 ))}
               </Pie>
               <Tooltip formatter={(value: number) => `${value}`} />
-              <Legend layout="horizontal" verticalAlign="bottom" align="center" />
+              <Legend
+                layout="horizontal"
+                verticalAlign="bottom"
+                align="center"
+              />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -129,4 +133,3 @@ const AdminDashboard: React.FC = () => {
 };
 
 export default AdminDashboard;
-
