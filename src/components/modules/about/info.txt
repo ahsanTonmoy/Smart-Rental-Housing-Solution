@@ -1,0 +1,3 @@
+- add all about components on components->modules->->about = create components 
+- filename will be capitalize 
+- import or all components on aboutroutes page.tsx (app->mainLayout->about->page.tsx)
