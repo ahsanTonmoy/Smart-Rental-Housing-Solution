@@ -12,10 +12,10 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { getAllUsers,  } from "@/services/Admin"; // Adjust import path as needed
+import { getAllUsers } from "@/services/Admin"; // Adjust import path as needed
 import { blockUser, activateUser } from "@/services/Users"; // Adjust import path as needed
 import { toast } from "sonner";
-import { Loader2,  Lock, Unlock } from "lucide-react";
+import { Loader2, Lock, Unlock } from "lucide-react";
 
 // Define interface for user data
 interface User {
@@ -107,11 +107,10 @@ const UsersManagementPage = () => {
         return "default";
     }
   };
-
   return (
     <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg my-10">
       <h2 className="text-2xl font-semibold mb-6 text-center">
-        User Management
+        User Management {users.length}
       </h2>
 
       {loading ? (

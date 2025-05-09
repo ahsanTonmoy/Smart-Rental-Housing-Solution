@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PieChart,
   Pie,
@@ -13,6 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+// import Status from "./status/Status";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
@@ -29,16 +30,41 @@ const sampleLineData = [
   { name: "Apr", sales: 700 },
   { name: "May", sales: 600 },
 ];
+import { User } from "./status/Status";
+import { getAllUsers } from "@/services/Admin";
 
 const AdminDashboard: React.FC = () => {
   const [startDate, setStartDate] = useState("2025-01-01");
   const [endDate, setEndDate] = useState("2025-12-31");
 
+  const [users, setUsers] = useState<User[]>([]);
+  // Fetch users on component mount
+  useEffect(() => {
+    const fetchUsers = async () => {
+      //   setLoading(true);
+      try {
+        const response = await getAllUsers();
+        console.log("response", response);
+        if (response.success) {
+          setUsers(response.data || []);
+        } else {
+        }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+      } finally {
+        // setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   return (
     <div className="p-6 space-y-8">
       {/* Page Title */}
-      <h1 className="text-3xl font-bold text-center">Admin Dashboard</h1>
-
+      <h1 className="text-3xl font-bold text-center">
+        Admin Dashboard {users.length}
+      </h1>
       {/* Date Range Filters */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
         <div className="flex flex-col">
@@ -67,11 +93,12 @@ const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
+      {/* <Status /> */}
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div className="bg-blue-600 text-white p-6 rounded-2xl shadow-lg text-center">
-          <h2 className="text-lg font-medium">Total Sales</h2>
-          <p className="text-2xl font-bold mt-2">$12,000</p>
+          <h2 className="text-lg font-medium">user</h2>
+          <p className="text-2xl font-bold mt-2">{users.length}</p>
         </div>
         <div className="bg-green-600 text-white p-6 rounded-2xl shadow-lg text-center">
           <h2 className="text-lg font-medium">Orders</h2>
