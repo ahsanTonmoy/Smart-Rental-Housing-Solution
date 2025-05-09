@@ -32,7 +32,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
 
   // Detect the user role from the URL path
-  const isAdmin = pathname.includes("/admin");
+  const isAdmin = pathname.includes("/admins");
   const isLandlord = pathname.includes("/landlords");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isTenant = pathname.includes("/tenants");
@@ -43,69 +43,69 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {
         title: "Dashboard",
         // url: "/admin/dashboard",
-        url: "/admin/dashboard",
+        url: "/admins/dashboard",
         icon: SquareTerminal,
-        isActive: pathname === "/admin/dashboard",
+        isActive: pathname === "/admins/dashboard",
       },
       {
         title: "User Management",
-        url: "/admin/users",
+        url: "/admins/users",
         icon: Users,
         items: [
           {
             title: "All Users",
-            url: "/admin/users",
+            url: "/admins/users",
           },
           {
             title: "Manage Roles",
-            // url: "/admin/users/manage-roles",
-            url: "/admin/manage-roles",
+            // url: "/admins/users/manage-roles",
+            url: "/admins/manage-roles",
           },
         ],
       },
       {
         title: "Rental Listings",
-        url: "/admin/listings",
+        url: "/admins/listings",
         icon: Building,
         items: [
           {
             title: "All Listings",
-            url: "/admin/listings",
+            url: "/admins/listings",
           },
           {
             title: "Update Listings",
-            url: "/admin/update-listing",
+            url: "/admins/update-listing",
           },
           {
             title: "Delete Listings",
-            url: "/admin/delete-listing",
+            url: "/admins/delete-listing",
           },
           {
             title: "Review/Oversee Listings",
-            url: "/admin/reviewListings",
+            url: "/admins/reviewListings",
           },
         ],
       },
       {
         title: "Profile",
-        // url: "/admin/myProfile",
-        url: "/admin/my-profile",
+        // url: "/admins/myProfile",
+        url: "/admins/my-profile",
         icon: User,
       },
       {
         title: "Settings",
-        url: "/admin/update-profile",
+        url: "/admins/update-profile",
         icon: Settings,
         items: [
           {
             title: "Admin Preferences",
             // url: "/update-profile",
-            url: "/admin/update-profile",
+            url: "/admins/update-profile",
           },
           {
             title: "Change Password",
             // url: "/change-password",
-            url: "/admin/change-password",
+            url: "/admins/change-password",
           },
         ],
       },

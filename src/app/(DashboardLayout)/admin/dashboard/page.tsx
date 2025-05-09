@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PieChart,
   Pie,
@@ -13,6 +13,9 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+
+import { getAllListings } from "@/services/Listings";
+// import { TRentalListing } from "@/types/listings";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
@@ -33,11 +36,28 @@ const sampleLineData = [
 const AdminDashboard: React.FC = () => {
   const [startDate, setStartDate] = useState("2025-01-01");
   const [endDate, setEndDate] = useState("2025-12-31");
+  //
+  const [initialListings, setInitialListings] = useState<ListingWithId[]>([]);
 
+  // Use useEffect to fetch data on the client side
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await getAllListings();
+        setInitialListings(data || []);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+        setInitialListings([]);
+      }
+    }
+
+    fetchData();
+  }, []);
+  console.log(initialListings)
   return (
     <div className="p-6 space-y-8">
       {/* Page Title */}
-      <h1 className="text-3xl font-bold text-center">Admin Dashboard</h1>
+      <h1 className="text-3xl font-bold text-center">Admin Dashboard 2</h1>
 
       {/* Date Range Filters */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
