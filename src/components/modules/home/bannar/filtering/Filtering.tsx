@@ -1,7 +1,6 @@
 "use client";
 
 import ListingCard from "@/components/ui/core/ListingCard";
-import NMContainer from "@/components/ui/core/NMContainer";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -10,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 import { getAllListings } from "@/services/Listings";
 import { TRentalListing } from "@/types/listings";
 import Link from "next/link";
@@ -26,7 +24,6 @@ interface FilteringProps {
 const Filtering: React.FC<FilteringProps> = ({ initialListings }) => {
   // State for search filters
   const [location, setLocation] = useState("");
-  const [priceRange, setPriceRange] = useState([0, 50000]);
   const [bedrooms, setBedrooms] = useState("any");
   const [filteredListings, setFilteredListings] =
     useState<ListingWithId[]>(initialListings);
@@ -45,15 +42,12 @@ const Filtering: React.FC<FilteringProps> = ({ initialListings }) => {
         listing.location.toLowerCase().includes(location.toLowerCase());
 
       // Filter by price range
-      const priceMatch =
-        listing.rentAmount >= priceRange[0] &&
-        listing.rentAmount <= priceRange[1];
 
       // Filter by bedrooms
       const bedroomsMatch =
         bedrooms === "any" || listing.bedrooms.toString() === bedrooms;
 
-      return locationMatch && priceMatch && bedroomsMatch;
+      return locationMatch && bedroomsMatch;
     });
 
     setFilteredListings(filtered);
@@ -62,41 +56,25 @@ const Filtering: React.FC<FilteringProps> = ({ initialListings }) => {
   // Reset all filters
   const [open, setOpen] = useState(false);
   return (
-    <NMContainer className=" p-0">
+    <div className=" p-0 !px-0">
       {/* Search Section */}
-      <div className="lg:p-6 p-3 bg-white/20 rounded-md">
+      <div className="">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:gap-4 gap-2">
-          <div className="bg-white rounded-md">
+          <div className="bg-white ">
             <Input
               placeholder="Enter location..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full h-full"
+              className="w-full h-full rounded-none"
             />
           </div>
 
-          <div className="bg-white rounded-md">
-            <div className="p-4 flex gap-4 justify-center items-center">
-              <span>৳{priceRange[0].toLocaleString()}</span>
-              <Slider
-                defaultValue={[0, 50000]}
-                min={0}
-                max={50000}
-                step={1000}
-                value={priceRange}
-                onValueChange={(value) => setPriceRange(value)}
-                className=" bg-[#0AA5CD] rounded-3xl text-xs"
-              />
-              <span>৳{priceRange[1].toLocaleString()}</span>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-md">
+          <div className="bg-white ">
             <Select
               value={bedrooms}
               onValueChange={(value) => setBedrooms(value)}
             >
-              <SelectTrigger className="w-full h-full">
+              <SelectTrigger className="w-full h-full rounded-none">
                 <SelectValue placeholder="Bedromes" />
               </SelectTrigger>
               <SelectContent className="bg-gray-50">
@@ -144,9 +122,9 @@ const Filtering: React.FC<FilteringProps> = ({ initialListings }) => {
           <div onClick={() => setOpen(true)} className="w-full ">
             <button
               onClick={handleSearch}
-              className="bg-[#0AA5CD] w-full p-4 text-white rounded-md hover:bg-black flex-1 cursor-pointer transition duration-300"
+              className="bg-[#0AA5CD] w-full p-4 text-white  hover:bg-black flex-1 cursor-pointer transition duration-300"
             >
-              Search
+              Find Your House
             </button>
           </div>
         </div>
@@ -216,7 +194,7 @@ const Filtering: React.FC<FilteringProps> = ({ initialListings }) => {
           </div>
         </div>
       ) : null}
-    </NMContainer>
+    </div>
   );
 };
 

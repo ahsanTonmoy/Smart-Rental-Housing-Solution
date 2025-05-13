@@ -83,11 +83,7 @@ const Navbar = () => {
         className={
           scrolled
             ? " bg-white fixed top-0 z-50 left-0 w-full shadow-2xs"
-            : `${
-                pathname === "/"
-                  ? "bg-transparent fixed text-white font-bold top-0 left-0 w-full shadow-2xs"
-                  : " bg-white text-black shadow-2xs font-bold"
-              }`
+            : " bg-white text-black shadow-2xs font-bold"
         }
       >
         <div className="container flex items-center justify-between mx-auto  px-4">

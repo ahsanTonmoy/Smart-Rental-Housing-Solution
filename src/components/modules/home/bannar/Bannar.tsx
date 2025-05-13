@@ -9,11 +9,14 @@ const Bannar = () => {
       {/* add background bannar form style */}
       <div className="wreeper">
         <div className="baseBannar">
-          <div className="py-[20%] w-full lg:px-20 md:px-6">
-            <div className="font-black md:text-3xl text-xl text-center uppercase text-white px-5">
-              Find Your Perfect Rental House Today!
+          <div className="py-32 w-full lg:px-10 md:px-6">
+            <div className="text-[#FFFFFFB3] text-lg">
+              Discover Your Perfect Real Estate
             </div>
-            <div className="py-9">
+            <div className="font-medium md:text-7xl text-xl text-left uppercase  text-white py-8 leading-20">
+              Looking for a <br></br> Rent House
+            </div>
+            <div className="">
               <FilteringPage />
             </div>
           </div>
