@@ -32,6 +32,7 @@ const sampleLineData = [
 import { getAllUsers } from "@/services/Admin";
 import { TRentalListing } from "@/types";
 import { getAllListings } from "@/services/Listings";
+import Status from "./status/Status";
 //
 export interface User {
   _id: string;
@@ -121,7 +122,7 @@ const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
-      <Status/>
+      <Status />
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div className="bg-blue-600 text-white p-6 rounded-2xl shadow-lg text-center">
