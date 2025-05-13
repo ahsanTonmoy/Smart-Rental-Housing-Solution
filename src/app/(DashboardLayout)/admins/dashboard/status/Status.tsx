@@ -1,69 +1,44 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import {
-//   Table,
-//   TableHeader,
-//   TableBody,
-//   TableRow,
-//   TableHead,
-//   TableCell,
-// } from "@/components/ui/table";
 
-// import { Button } from "@/components/ui/button";
-// import { Badge } from "@/components/ui/badge";
-import { getAllUsers } from "@/services/Admin"; // Adjust import path as needed
-// import { blockUser, activateUser } from "@/services/Users"; // Adjust import path as needed
-import { toast } from "sonner";
+import { TRentalListing } from "@/types";
+import { getAllListings } from "@/services/Listings";
 // import { Loader2, Lock, Unlock } from "lucide-react";
 
-// Define interface for user data
-export interface User {
-  _id: string;
-  name: string;
-  email: string;
-  role: string;
-  status: string;
-  isBlocked: boolean;
-}
+//
+type ListingWithId = TRentalListing & { _id: string };
 
 const Status = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  // Fetch users on component mount
-  useEffect(() => {
-    const fetchUsers = async () => {
-      //   setLoading(true);
-      try {
-        const response = await getAllUsers();
-        console.log("response", response);
-        if (response.success) {
-          setUsers(response.data || []);
-        } else {
-          toast.error(response.message || "Failed to fetch users");
-        }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (error) {
-        toast.error("An error occurred while fetching users");
-      } finally {
-        // setLoading(false);
-      }
-    };
+  const [initialListings, setInitialListings] = useState<ListingWithId[]>([]);
 
-    fetchUsers();
+  // Use useEffect to fetch data on the client side
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await getAllListings();
+        setInitialListings(data || []);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+        setInitialListings([]);
+      }
+    }
+
+    fetchData();
   }, []);
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg my-10">
       <h2 className="text-2xl font-semibold mb-6 text-center">
-        User Management
+        User Management {initialListings.length}
       </h2>
 
       {/*  */}
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div className="bg-blue-600 text-white p-6 rounded-2xl shadow-lg text-center">
-          <h2 className="text-lg font-medium">Total Sales</h2>
-          <p className="text-2xl font-bold mt-2">{users.length}</p>
+          <h2 className="text-lg font-medium">house</h2>
+          <p className="text-2xl font-bold mt-2">{initialListings.length}</p>
         </div>
         <div className="bg-green-600 text-white p-6 rounded-2xl shadow-lg text-center">
           <h2 className="text-lg font-medium">Orders</h2>

@@ -13,7 +13,6 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-// import Status from "./status/Status";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
@@ -30,13 +29,24 @@ const sampleLineData = [
   { name: "Apr", sales: 700 },
   { name: "May", sales: 600 },
 ];
-import { User } from "./status/Status";
 import { getAllUsers } from "@/services/Admin";
-
+import { TRentalListing } from "@/types";
+import { getAllListings } from "@/services/Listings";
+//
+export interface User {
+  _id: string;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  isBlocked: boolean;
+}
+//
+type ListingWithId = TRentalListing & { _id: string };
 const AdminDashboard: React.FC = () => {
   const [startDate, setStartDate] = useState("2025-01-01");
   const [endDate, setEndDate] = useState("2025-12-31");
-
+  // users
   const [users, setUsers] = useState<User[]>([]);
   // Fetch users on component mount
   useEffect(() => {
@@ -57,6 +67,24 @@ const AdminDashboard: React.FC = () => {
     };
 
     fetchUsers();
+  }, []);
+
+  // houses
+  const [initialListings, setInitialListings] = useState<ListingWithId[]>([]);
+
+  // Use useEffect to fetch data on the client side
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await getAllListings();
+        setInitialListings(data || []);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+        setInitialListings([]);
+      }
+    }
+
+    fetchData();
   }, []);
 
   return (
@@ -93,7 +121,7 @@ const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* <Status /> */}
+      <Status/>
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div className="bg-blue-600 text-white p-6 rounded-2xl shadow-lg text-center">
@@ -102,7 +130,7 @@ const AdminDashboard: React.FC = () => {
         </div>
         <div className="bg-green-600 text-white p-6 rounded-2xl shadow-lg text-center">
           <h2 className="text-lg font-medium">Orders</h2>
-          <p className="text-2xl font-bold mt-2">350</p>
+          <p className="text-2xl font-bold mt-2">{initialListings.length}</p>
         </div>
         <div className="bg-yellow-500 text-white p-6 rounded-2xl shadow-lg text-center">
           <h2 className="text-lg font-medium">Customers</h2>
