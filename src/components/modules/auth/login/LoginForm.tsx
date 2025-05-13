@@ -10,16 +10,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 // import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
+import { useUser } from "@/context/UserContext";
 import { loginUser } from "@/services/AuthService";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useUser } from "@/context/UserContext";
 
 import { Eye, EyeOff } from "lucide-react";
 
@@ -27,7 +27,7 @@ export default function LoginForm() {
   const form = useForm({
     resolver: zodResolver(loginSchema),
   });
-
+  const { refetchUser } = useUser();
   const { setIsLoading } = useUser();
   // const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // 👁 Password visibility state
@@ -56,6 +56,8 @@ export default function LoginForm() {
       const res = await loginUser(data);
       setIsLoading(true);
       if (res?.success) {
+        await refetchUser();
+        router.push("/");
         toast.success(res?.message);
         if (redirect) {
           router.push(redirect);

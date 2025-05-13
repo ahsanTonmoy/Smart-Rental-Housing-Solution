@@ -55,9 +55,11 @@ const Navbar = () => {
   }, []);
 
   //
-  const handleLogOut = () => {
-    logout();
-    setIsLoading(true);
+  const handleLogOut = async () => {
+    logout(); // clear auth token
+    await refetchUser(); // fetch user again and update context
+    router.refresh(); // refresh UI if needed
+
     if (pathname.startsWith("/dashboard")) {
       router.push("/");
     }
@@ -240,3 +242,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+function refetchUser() {
+  throw new Error("Function not implemented.");
+}
