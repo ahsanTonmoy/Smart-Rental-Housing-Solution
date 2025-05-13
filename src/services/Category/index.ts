@@ -17,7 +17,6 @@ export const createCategory = async (data: FormData) => {
     revalidateTag("CATEGORY");
 
     return res.json();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return Error(error);
   }
@@ -33,14 +32,12 @@ export const getAllCategories = async () => {
     });
 
     return res.json();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return Error(error);
   }
 };
 
 // delete category
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const deleteCategory = async (categoryId: string): Promise<any> => {
   try {
     const res = await fetch(
@@ -54,7 +51,6 @@ export const deleteCategory = async (categoryId: string): Promise<any> => {
     );
     revalidateTag("CATEGORY");
     return res.json();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return Error(error);
   }
