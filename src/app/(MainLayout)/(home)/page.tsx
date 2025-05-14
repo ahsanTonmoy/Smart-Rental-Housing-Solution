@@ -5,7 +5,11 @@ import RentPropertySlider from "@/components/modules/home/PropertySlider/Propert
 import PopularLocations from "@/components/modules/home/PupolarLocation/PopularLocations";
 import RulesSection from "@/components/modules/home/RulesSection/RulesSection";
 import TestimonialSection from "@/components/modules/home/TestimonialSection/TestimonialSection";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Home - BasaFinder | Smart Rental & Housing Solution ",
+  description: "Smart Rental & Housing Solution",
+};
 const page = () => {
   return (
     <div>
