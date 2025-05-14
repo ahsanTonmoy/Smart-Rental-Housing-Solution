@@ -100,9 +100,9 @@ const ListingsPage = () => {
                         "/placeholder.jpg"
                       }
                       alt="Listing Image"
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-t-xl"
+                      width={100}
+                      height={50}
+                      className=""
                     ></Image>
                   </TableCell>
                   <TableCell>{listing.location}</TableCell>
