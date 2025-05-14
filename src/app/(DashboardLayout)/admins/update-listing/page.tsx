@@ -83,7 +83,7 @@ const DeleteListings = () => {
                         onClick={() =>
                           //   router.push(`/landlords/listings/edit/${listing._id}`)
                           router.push(
-                            `/admin/update-listing/edit/${listing._id}`
+                            `/admins/update-listing/edit/${listing._id}`
                           )
                         }
                       >
