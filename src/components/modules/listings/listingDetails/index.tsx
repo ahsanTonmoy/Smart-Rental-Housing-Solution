@@ -34,7 +34,8 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 const ListingDetails = ({ listing }: { listing: TRentalListing }) => {
   const { user } = useUser();
   const { setListing } = useRentalRequest();
@@ -74,26 +75,23 @@ const ListingDetails = ({ listing }: { listing: TRentalListing }) => {
   };
 
   return (
-    <Card className="container mx-auto my-10 p-6 bg-white grid md:grid-cols-2 border-0 rounded-2xl hover:shadow-2xl cursor-pointer">
+    <div className="container mx-auto my-10 p-6 bg-white grid md:grid-cols-2 border-0 rounded-2xl min-h-screen cursor-pointer">
+      <div className="">
+        <Carousel>
+          {listing.images.map((image, idx) => (
+            <div key={idx} className="relative w-full h-80">
+              <Image
+                src={image.replace("http://", "https://") || "/placeholder.jpg"}
+                alt={`Listing Image ${idx}`}
+                fill
+                className="object-cover rounded-xl"
+              />
+            </div>
+          ))}
+        </Carousel>
+      </div>
       {/* Swiper for Listing Images */}
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        navigation
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        className="w-full h-80 rounded-xl"
-      >
-        {listing.images.map((image, idx) => (
-          <SwiperSlide key={idx} className="relative w-full h-80">
-            <Image
-              src={image.replace("http://", "https://") || "/placeholder.jpg"}
-              alt={`Listing Image ${idx}`}
-              fill
-              className="object-cover rounded-xl"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      
 
       <CardContent className="mt-8 space-y-4">
         <h1 className="text-3xl font-bold text-gray-800">{listing.location}</h1>
@@ -205,7 +203,7 @@ const ListingDetails = ({ listing }: { listing: TRentalListing }) => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </Card>
+    </div>
   );
 };
 
