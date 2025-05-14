@@ -16,23 +16,10 @@ import {
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
-const samplePieData = [
-  { name: "Sales", value: 450 },
-  { name: "Returns", value: 120 },
-  { name: "Orders", value: 330 },
-];
-
-const sampleLineData = [
-  { name: "Jan", sales: 400 },
-  { name: "Feb", sales: 300 },
-  { name: "Mar", sales: 500 },
-  { name: "Apr", sales: 700 },
-  { name: "May", sales: 600 },
-];
 import { getAllUsers } from "@/services/Admin";
 import { TRentalListing } from "@/types";
 import { getAllListings } from "@/services/Listings";
-import Status from "./status/Status";
+// import Status from "./status/Status";
 //
 export interface User {
   _id: string;
@@ -90,15 +77,25 @@ const AdminDashboard: React.FC = () => {
 
     fetchData();
   }, []);
+  const samplePieData = [
+    { name: "User", value: 450 },
+    { name: "Rentes", value: 120 },
+    { name: "Orders", value: 330 },
+  ];
+  const sampleLineData = [
+    { name: "Jan", sales: 400 },
+    { name: "Feb", sales: 300 },
+    { name: "Mar", sales: 500 },
+    { name: "Apr", sales: 700 },
+    { name: "May", sales: 600 },
+  ];
 
   return (
     <div className="p-6 space-y-8">
       {/* Page Title */}
-      <h1 className="text-3xl font-bold text-center">
-        Admin Dashboard {users.length}
-      </h1>
+      <h1 className="text-3xl font-bold text-center">Admin Dashboard</h1>
       {/* Date Range Filters */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+      {/* <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
         <div className="flex flex-col">
           <label htmlFor="start-date" className="font-semibold mb-1">
             From:
@@ -123,9 +120,9 @@ const AdminDashboard: React.FC = () => {
             className="border rounded-lg px-3 py-2"
           />
         </div>
-      </div>
+      </div> */}
 
-      <Status />
+      {/* <Status /> */}
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 capitalize">
         <div className="bg-blue-600 text-white p-6 rounded-2xl shadow-lg text-center">
@@ -138,7 +135,7 @@ const AdminDashboard: React.FC = () => {
         </div>
         <div className="bg-yellow-500 text-white p-6 rounded-2xl shadow-lg text-center">
           <h2 className="text-lg font-semibold">total rental request</h2>
-          <p className="text-2xl font-bold mt-2">120</p>
+          <p className="text-2xl font-bold mt-2">12</p>
         </div>
       </div>
 

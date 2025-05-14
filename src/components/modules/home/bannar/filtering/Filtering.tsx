@@ -60,21 +60,21 @@ const Filtering: React.FC<FilteringProps> = ({ initialListings }) => {
       {/* Search Section */}
       <div className="">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:gap-4 gap-2">
-          <div className="bg-white ">
+          <div className="bg-white">
             <Input
               placeholder="Enter location..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full h-full rounded-none"
+              className="w-full h-full rounded-none p-6"
             />
           </div>
 
-          <div className="bg-white ">
+          <div className="bg-white">
             <Select
               value={bedrooms}
               onValueChange={(value) => setBedrooms(value)}
             >
-              <SelectTrigger className="w-full h-full rounded-none">
+              <SelectTrigger className="w-full h-full rounded-none p-6">
                 <SelectValue placeholder="Bedromes" />
               </SelectTrigger>
               <SelectContent className="bg-gray-50">
@@ -122,7 +122,7 @@ const Filtering: React.FC<FilteringProps> = ({ initialListings }) => {
           <div onClick={() => setOpen(true)} className="w-full ">
             <button
               onClick={handleSearch}
-              className="bg-[#0AA5CD] w-full p-4 text-white  hover:bg-black flex-1 cursor-pointer transition duration-300"
+              className="bg-[#0AA5CD] w-full p-6 text-white hover:bg-black font-black cursor-pointer transition duration-300"
             >
               Find Your House
             </button>

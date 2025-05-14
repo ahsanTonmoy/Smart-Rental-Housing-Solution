@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
+import brand from "@/assets/images/brand/basa-finder-logo.png";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -9,11 +11,8 @@ const Footer = () => {
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 md:px-16">
         {/* Logo & Description */}
         <div>
-          <Link
-            href="/"
-            className="text-2xl font-bold capitalize text-[#0AA5CD] mb-4"
-          >
-            basa finder
+          <Link href="/" className="flex items-center space-x-2 py-4">
+            <Image src={brand} width={200} alt="BasaFinder Logo" />
           </Link>
           <p className="text-sm text-gray-300 mb-4">
             A complete solution to help you manage your rental properties

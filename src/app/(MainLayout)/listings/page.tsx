@@ -187,7 +187,7 @@ const RentalListings: React.FC<RentalListingsProps> = ({ initialListings }) => {
       </div> */}
 
       {/* Listings Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-10 px-10 py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-10 px-4 py-8">
         {filteredListings.length > 0 ? (
           filteredListings.map((listing: ListingWithId, idx: number) => (
             <ListingCard

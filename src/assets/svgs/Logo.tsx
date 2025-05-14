@@ -1,4 +1,4 @@
-import logo from "@/assets/images/brand/basaFinder-md.png";
+import logo from "@/assets/images/brand/basa-finder-logo.png";
 import Image from "next/image";
 
 export default function Logo() {

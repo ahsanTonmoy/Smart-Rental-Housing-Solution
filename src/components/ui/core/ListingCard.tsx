@@ -21,7 +21,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
   return (
     <>
       <Link href={`/listings/${listing?.id}`} passHref>
-        <div className="bg-white rounded-xl shadow-2xl hover:shadow-lg transition decoration-300 h-[480px]">
+        <div className="bg-white rounded-xl hover:shadow-lg transition decoration-300 h-[520px]">
           {/* image block */}
           <div className="relative w-full h-56 ">
             <Image
@@ -45,7 +45,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
             {/* description */}
             <div className="grid gap-2">
               {/* tityle */}
-              <div className=" text-xl font-bold capitalize">
+              <div className=" text-base font-bold capitalize">
                 <p className="">{listing.description}</p>
               </div>
               {/* price */}

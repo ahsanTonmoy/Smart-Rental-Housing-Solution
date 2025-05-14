@@ -129,9 +129,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     navMain: [
       {
         title: "Dashboard",
-        url: "/tenants/dashboard",
+        url: "/tenants/request",
         icon: SquareTerminal,
-        isActive: pathname === "/tenants/dashboard",
+        isActive: pathname === "/tenants/request",
       },
       {
         title: "Manage Rental Requests",
@@ -197,9 +197,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     navMain: [
       {
         title: "Dashboard",
-        url: "/landlords/dashboard",
+        url: "/landlords/listings/view",
         icon: SquareTerminal,
-        isActive: pathname === "/landlords/dashboard",
+        isActive: pathname === "/landlords/listings/view",
       },
       {
         title: "Manage Listings",

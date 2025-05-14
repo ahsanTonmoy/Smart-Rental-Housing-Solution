@@ -75,76 +75,95 @@ const ListingDetails = ({ listing }: { listing: TRentalListing }) => {
   };
 
   return (
-    <div className="container mx-auto my-10 p-6 bg-white grid md:grid-cols-2 border-0 rounded-2xl min-h-screen cursor-pointer">
-      <div className="">
-        <Carousel>
-          {listing.images.map((image, idx) => (
-            <div key={idx} className="relative w-full h-80">
-              <Image
-                src={image.replace("http://", "https://") || "/placeholder.jpg"}
-                alt={`Listing Image ${idx}`}
-                fill
-                className="object-cover rounded-xl"
-              />
-            </div>
-          ))}
-        </Carousel>
+    <div className="container mx-auto my-10 p-6 bg-white grid gap-8 min-h-screen cursor-pointer">
+      {/* title */}
+      <div className=" md:flex justify-between">
+        <div className="">
+          <h1 className="text-3xl font-bold w-2/3 text-gray-800">
+            {listing.description}
+          </h1>
+          <div className="flex items-center gap-4 py-4 text-gray-600">
+            <MapPin className="w-5 h-5 text-[#0AA5CD]" />
+            <span>{listing.location}</span>
+          </div>
+        </div>
+        <div className="">
+          <div className="flex items-center gap-4  font-bold text-3xl text-gray-600">
+            <span>৳{listing.rentAmount.toLocaleString()}</span>
+          </div>
+        </div>
       </div>
-      {/* Swiper for Listing Images */}
-      
+      <CardContent className="">
+        {/* content */}
+        <div className="grid md:grid-cols-2 gap-9">
+          {/* Swiper for Listing Images */}
+          <div className="">
+            <Carousel>
+              {listing.images.map((image, idx) => (
+                <div key={idx} className="relative w-full h-80">
+                  <Image
+                    src={
+                      image.replace("http://", "https://") || "/placeholder.jpg"
+                    }
+                    alt={`Listing Image ${idx}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </Carousel>
+          </div>
+          {/* content */}
+          <div className="py-6 ">
+            {/*  */}
+            <h1 className="text-base text-gray-600 font-bold">
+              {listing.description}
+            </h1>
+            {/*  */}
+            <div className="flex items-center gap-4 py-4 text-gray-600 ">
+              <BedDouble className="w-5 h-5 text-primary" />
+              <span>{listing.bedrooms} Bedrooms</span>
+            </div>
+            {/*  */}
+            <div className="flex items-center gap-4 text-gray-600">
+              <MapPin className="w-5 h-5 text-[#0AA5CD]" />
+              <span>{listing.location}</span>
+            </div>
+            {/*  */}
+            <div className="flex items-center gap-4 py-4 text-gray-600">
+              <Star className="w-5 h-5 text-yellow-500" />
+              <span className="grid">
+                Amenities: {listing.amenities.join(", ")}
+              </span>
+            </div>
 
-      <CardContent className="mt-8 space-y-4">
-        <h1 className="text-3xl font-bold text-gray-800">{listing.location}</h1>
-        <p className="text-gray-500">{listing.description}</p>
-
-        <div className="flex items-center gap-4 text-gray-600">
-          <MapPin className="w-5 h-5 text-primary" />
-          <span>{listing.location}</span>
-        </div>
-
-        <div className="flex items-center gap-4 text-gray-600">
-          <BedDouble className="w-5 h-5 text-primary" />
-          <span>{listing.bedrooms} Bedrooms</span>
-        </div>
-
-        <div className="flex items-center gap-4 text-gray-600">
-          <DollarSign className="w-5 h-5 text-primary" />
-          <span>৳{listing.rentAmount.toLocaleString()}</span>
-        </div>
-
-        <div className="flex items-center gap-4 text-gray-600">
-          <Star className="w-5 h-5 text-yellow-500" />
-          <span>Amenities: {listing.amenities.join(", ")}</span>
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col md:flex-row gap-6 mt-6">
-          {user ? (
-            <div className="">
-              <Button
-                className="rounded-full px-6 py-2"
-                onClick={handleRequestRent}
-              >
-                Request Rental
-              </Button>
-              {/* {user?.role && (
+            {/* CTA Buttons */}
+            <div className="flex flex-col md:flex-row gap-6 py-6 w-full transtion ">
+              {user ? (
+                <div className="">
+                  <Button className="px-6 py-2" onClick={handleRequestRent}>
+                    Request Rental
+                  </Button>
+                  {/* {user?.role && (
                 <Button
-                  className="rounded-full px-6 py-2"
+                  className="px-6 py-2"
                   onClick={handleRequestRent}
                 >
                   Request Rental
                 </Button>
               )} */}
+                </div>
+              ) : (
+                <div className="">
+                  <Link
+                    href={`/login?redirect=${encodeURIComponent(pathname)}`}
+                  >
+                    <Button className="px-6 py-2">Request Rental</Button>
+                  </Link>
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="">
-              <Link href={`/login?redirect=${encodeURIComponent(pathname)}`}>
-                <Button className="rounded-full px-6 py-2">
-                  Request Rental
-                </Button>
-              </Link>
-            </div>
-          )}
+          </div>
         </div>
       </CardContent>
 
