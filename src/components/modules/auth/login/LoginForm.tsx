@@ -1,5 +1,5 @@
 "use client";
-// import ReCAPTCHA from "react-google-recaptcha";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,62 +13,48 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-// import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
 import { useUser } from "@/context/UserContext";
 import { loginUser } from "@/services/AuthService";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import { loginSchema } from "./loginValidation";
-
 import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginForm() {
   const form = useForm({
     resolver: zodResolver(loginSchema),
   });
-  const { refetchUser } = useUser();
-  const { setIsLoading } = useUser();
-  // const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // 👁 Password visibility state
+
+  const { refetchUser, setIsLoading } = useUser();
+  const [showPassword, setShowPassword] = useState(false);
 
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirectPath");
-  const router = useRouter();
+  const redirect = searchParams.get("redirect") || "/"; // ✅ fallback to home
 
+  const router = useRouter();
   const {
     formState: { isSubmitting },
   } = form;
 
-  // const handleReCaptcha = async (value: string | null) => {
-  //   try {
-  //     const res = await reCaptchaTokenVerification(value!);
-  //     if (res?.success) {
-  //       setReCaptchaStatus(true);
-  //     }
-  //   } catch (err: any) {
-  //     console.error(err);
-  //   }
-  // };
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const res = await loginUser(data);
       setIsLoading(true);
+      const res = await loginUser(data);
+
       if (res?.success) {
         await refetchUser();
-        router.push("/");
-        toast.success(res?.message);
-        if (redirect) {
-          router.push(redirect);
-        } else {
-          router.push("/");
-        }
+        toast.success(res?.message || "Login successful");
+
+        router.push(redirect); // ✅ Single redirect based on URL param
       } else {
-        toast.error(res?.message);
+        toast.error(res?.message || "Login failed");
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
+      toast.error("Something went wrong during login.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -80,8 +66,10 @@ export default function LoginForm() {
           <p className="font-extralight text-sm text-gray-600">Welcome back!</p>
         </div>
       </div>
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+          {/* Email */}
           <FormField
             control={form.control}
             name="email"
@@ -96,7 +84,7 @@ export default function LoginForm() {
             )}
           />
 
-          {/* Password Field with Visibility Toggle */}
+          {/* Password */}
           <FormField
             control={form.control}
             name="password"
@@ -126,32 +114,22 @@ export default function LoginForm() {
             )}
           />
 
-          {/* <div className="flex mt-3 w-full">
-            <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY!}
-              onChange={handleReCaptcha}
-              className="mx-auto"
-            />
-          </div> */}
-
-          <Button
-            // disabled={!reCaptchaStatus}
-            type="submit"
-            className="mt-5 w-full"
-          >
-            {isSubmitting ? "Logging...." : "Login"}
+          {/* Submit */}
+          <Button type="submit" className="mt-5 w-full">
+            {isSubmitting ? "Logging in..." : "Login"}
           </Button>
         </form>
       </Form>
+
       <p className="text-sm text-gray-600 text-center my-3">
-        Do not have an account?{" "}
-        <Link href="/register" className="text-primary">
+        Don’t have an account?{" "}
+        <Link href="/register" className="text-primary font-medium">
           Register
         </Link>
       </p>
       <p className="text-sm text-gray-600 text-center my-3">
-        Go to{" "}
-        <Link href="/" className="text-primary">
+        Back to{" "}
+        <Link href="/" className="text-primary font-medium">
           Home
         </Link>
       </p>

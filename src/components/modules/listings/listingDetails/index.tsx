@@ -33,17 +33,18 @@ import { useRentalRequest } from "@/context/RentalRequestContext";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const ListingDetails = ({ listing }: { listing: TRentalListing }) => {
   const { user } = useUser();
   const { setListing } = useRentalRequest();
   const router = useRouter();
+  const pathname = usePathname();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [moveInDate, setMoveInDate] = useState("");
   const [rentalDuration, setRentalDuration] = useState("");
   const [specialRequirements, setSpecialRequirements] = useState("");
-
   // ✅ Handle request button click
   const handleRequestRent = () => {
     setModalOpen(true);
@@ -122,19 +123,29 @@ const ListingDetails = ({ listing }: { listing: TRentalListing }) => {
         <div className="flex flex-col md:flex-row gap-6 mt-6">
           {user ? (
             <div className="">
-              {user?.role === "tenant" && (
+              <Button
+                className="rounded-full px-6 py-2"
+                onClick={handleRequestRent}
+              >
+                Request Rental
+              </Button>
+              {/* {user?.role && (
                 <Button
                   className="rounded-full px-6 py-2"
                   onClick={handleRequestRent}
                 >
                   Request Rental
                 </Button>
-              )}
+              )} */}
             </div>
           ) : (
-            <Link href={"/login"} className=" text-xs text-gray-500 capitalize">
-              [note: if u rent a house please login as(tenants)]
-            </Link>
+            <div className="">
+              <Link href={`/login?redirect=${encodeURIComponent(pathname)}`}>
+                <Button className="rounded-full px-6 py-2">
+                  Request Rental
+                </Button>
+              </Link>
+            </div>
           )}
         </div>
       </CardContent>
