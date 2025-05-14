@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import brand from "@/assets/images/brand/basaFinder-md.png";
+import brand from "@/assets/images/brand/basa-finder-logo-3.png";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -35,7 +35,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   //
-  const { user, setIsLoading } = useUser();
+  const { user } = useUser();
   const router = useRouter();
   // const products = useAppSelector(orderedProductsSelector);
   const [isOpen, setIsOpen] = useState(false);
@@ -84,15 +84,15 @@ const Navbar = () => {
       <header
         className={
           scrolled
-            ? " bg-white fixed top-0 z-50 left-0 w-full shadow-2xs"
-            : " bg-white text-black shadow-2xs font-bold"
+            ? " bg-white fixed top-0 z-50 left-0 w-full p-4 shadow-2xs transition duration-300 ease-in font-bold uppercase"
+            : " bg-white text-black p-4 font-bold shadow-2xs uppercase"
         }
       >
         <div className="container flex items-center justify-between mx-auto  px-4">
           {/* Logo - Responsive sizing */}
           <div>
             <Link href="/" className="flex items-center space-x-2">
-              <Image src={brand} alt="BasaFinder Logo" />
+              <Image src={brand} width={200} alt="BasaFinder Logo" />
               {/* <span className="text-lg sm:text-xl md:text-2xl font-bold">
               BasaFinder
             </span> */}
