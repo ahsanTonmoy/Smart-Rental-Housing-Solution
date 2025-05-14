@@ -14,7 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Loader2,  XCircle, CheckCircle } from "lucide-react";
+import { Loader2, XCircle, CheckCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import Modal from "@/components/ui/Modal";
 
@@ -230,7 +230,7 @@ const LandlordTenantRequests = () => {
         onClose={() => setPhoneModalVisible(false)} // ✅ Use onClose instead of onCancel
         okText="Submit & Approve"
       >
-        <div className="py-4">
+        <div className="py-4 bg-white">
           <p>Please provide your phone number for the tenant to contact you:</p>
           <Input
             placeholder="Enter your phone number"
