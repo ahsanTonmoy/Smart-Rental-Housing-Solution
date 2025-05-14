@@ -70,6 +70,9 @@ const AdminDashboard: React.FC = () => {
     fetchUsers();
   }, []);
 
+  const tenants = users.filter((users) => users.role === "tenant");
+  console.log(tenants);
+
   // houses
   const [initialListings, setInitialListings] = useState<ListingWithId[]>([]);
 
@@ -124,17 +127,17 @@ const AdminDashboard: React.FC = () => {
 
       <Status />
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 capitalize">
         <div className="bg-blue-600 text-white p-6 rounded-2xl shadow-lg text-center">
-          <h2 className="text-lg font-medium">user</h2>
+          <h2 className="text-lg font-semibold">total user</h2>
           <p className="text-2xl font-bold mt-2">{users.length}</p>
         </div>
         <div className="bg-green-600 text-white p-6 rounded-2xl shadow-lg text-center">
-          <h2 className="text-lg font-medium">Orders</h2>
+          <h2 className="text-lg font-semibold">Total rental houses</h2>
           <p className="text-2xl font-bold mt-2">{initialListings.length}</p>
         </div>
         <div className="bg-yellow-500 text-white p-6 rounded-2xl shadow-lg text-center">
-          <h2 className="text-lg font-medium">Customers</h2>
+          <h2 className="text-lg font-semibold">total rental request</h2>
           <p className="text-2xl font-bold mt-2">120</p>
         </div>
       </div>
